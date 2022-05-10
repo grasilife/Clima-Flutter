@@ -1,5 +1,6 @@
 import 'package:geolocator/geolocator.dart';
 
+final String kOpenweathermapApiKey = 'b205997d83c1a3dc2c2f33bc31660aa1';
 final List<PositionItem> positionItems = <PositionItem>[];
 final GeolocatorPlatform geolocatorPlatform = GeolocatorPlatform.instance;
 const String kLocationServicesDisabledMessage =
@@ -78,4 +79,16 @@ Future<bool> handlePermission() async {
   return true;
 }
 
-class Geolocator {}
+class Location {
+  double latitude;
+  double longitude;
+  Future<void> getCurrentLoacation() async {
+    final hasPermission = await handlePermission();
+    if (!hasPermission) {
+      return;
+    }
+    Position position = await geolocatorPlatform.getCurrentPosition();
+    latitude = position.latitude;
+    longitude = position.longitude;
+  }
+}
