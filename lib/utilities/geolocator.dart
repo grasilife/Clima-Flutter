@@ -1,6 +1,5 @@
 import 'package:geolocator/geolocator.dart';
 
-final String kOpenweathermapApiKey = 'b205997d83c1a3dc2c2f33bc31660aa1';
 final List<PositionItem> positionItems = <PositionItem>[];
 final GeolocatorPlatform geolocatorPlatform = GeolocatorPlatform.instance;
 const String kLocationServicesDisabledMessage =
