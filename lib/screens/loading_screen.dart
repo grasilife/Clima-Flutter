@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:clima/utilities/geolocator.dart';
 import 'package:clima/services/networking.dart';
+import 'location_screen.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class LoadingScreen extends StatefulWidget {
   @override
@@ -34,18 +36,25 @@ class _LoadingScreenState extends State<LoadingScreen> {
     print(temperature);
     print(condition);
     print(city);
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return LocationScreen();
+    }));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: RaisedButton(
-          onPressed: () {
-            //Get the current location
-          },
-          child: Text('Get Location'),
+        child: SpinKitRotatingCircle(
+          color: Colors.white,
+          size: 50.0,
         ),
+        // child: RaisedButton(
+        //   onPressed: () {
+        //     //Get the current location
+        //   },
+        //   child: Text('Get Location'),
+        // ),
       ),
     );
   }
