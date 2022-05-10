@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:clima/utilities/geolocator.dart';
 import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class LoadingScreen extends StatefulWidget {
   @override
@@ -25,7 +26,15 @@ class _LoadingScreenState extends State<LoadingScreen> {
         'https://api.openweathermap.org/data/2.5/weather?lat=$lat&lon=$lon&appid=$kOpenweathermapApiKey'));
     if (response.statusCode == 200) {
       String data = response.body;
-      print(data);
+      const JsonDecoder decoder = JsonDecoder();
+      final Map<String, dynamic> decoderData = decoder.convert(data);
+      double temperature = decoderData['main']['temp'];
+      int condition = decoderData['weather'][0]['id'];
+      String city = decoderData['name'];
+
+      print(temperature);
+      print(condition);
+      print(city);
     } else {
       print('天气数据获取失败');
     }
