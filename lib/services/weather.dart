@@ -5,6 +5,13 @@ final String kOpenWeatherMapApiKey = 'b205997d83c1a3dc2c2f33bc31660aa1';
 final String openWeatherMapURL = 'https://api.openweathermap.org/data/2.5';
 
 class WeatherModel {
+  Future<dynamic> getCityWeather(String city) async {
+    NetworkHelper networkHelper = NetworkHelper(
+        '$openWeatherMapURL/weather?q=$city&appid=$kOpenWeatherMapApiKey');
+    var weatherData = await networkHelper.getData();
+    return weatherData;
+  }
+
   Future<dynamic> getLocationWeather() async {
     Location location = Location();
     print(location);
@@ -12,7 +19,6 @@ class WeatherModel {
     NetworkHelper networkHelper = NetworkHelper(
         '$openWeatherMapURL/weather?lat=${location.latitude}&lon=${location.longitude}&units=metric&appid=$kOpenWeatherMapApiKey');
     var weatherData = await networkHelper.getData();
-    print(weatherData);
     return weatherData;
   }
 
